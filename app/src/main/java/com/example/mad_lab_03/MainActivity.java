@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         btn = (Button)findViewById(id.btnsignup);
 
         name1 = (EditText)findViewById(id.editText);
-        String name2 = name1.getText().toString();
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name);
@@ -51,12 +51,13 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                notification();
+                String name2 = name1.getText().toString();
+                notification(name2);
             }
         });
     }
 
-    public void notification(){
+    public void notification(String name2){
         Intent intent = new Intent(this, Main2Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                 Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         NotificationCompat.Builder builder = new
                 NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle("Hello "/*+name2*/) //name2 do not pass the values
+                .setContentTitle("Hello "+name2)
                 .setContentText("Click to REGISTER!")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
